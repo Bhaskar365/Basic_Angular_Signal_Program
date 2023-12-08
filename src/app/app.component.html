@@ -1,5 +1,10 @@
 <p>{{title()}}</p>
- 
+<p>Signal as observable title - {{title$ | async}}</p>
+
+<h3>Subtitle as observable - {{subtitle$ | async}}</h3>
+
+<h3>Subtitle as signal - {{subtitle()}}</h3>
+
 <div *ngFor="let user of serv.userArray()" style="border:2px solid black">
   <h2>ID : {{user.id}}</h2>
   <h2>NAME : {{user.name}}</h2>

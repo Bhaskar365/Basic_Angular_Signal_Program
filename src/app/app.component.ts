@@ -5,6 +5,8 @@ import { CounterButtonComponent } from './counter-button/counter-button.componen
 import { CounterDisplayComponent } from './counter-display/counter-display.component';
 import { SharedServiceService } from './shared-service.service';
 import { MatButtonModule } from '@angular/material/button';
+import { toObservable , toSignal } from '@angular/core/rxjs-interop';
+import { of } from 'rxjs';
 
 @Component({
   selector: 'app-root',
@@ -19,7 +21,16 @@ export class AppComponent {
   title = signal('Signal Overview');
   count = signal(10);
 
-  constructor(public serv: SharedServiceService) {}
+  title$ = toObservable(this.title);
+  
+  subtitle$=of('Signal Function');
+
+  subtitle = toSignal(this.subtitle$)
+
+
+  constructor(public serv: SharedServiceService) {
+    console.log(this.title$)
+  }
 
   addUser() {
     this.serv.userArray.update(previous=>[...previous,({id:3,name:'Ponting'})])
